@@ -15,15 +15,14 @@ const routes = [
   ...leftNavRouter,
   {
     path: "/",
-    name: "app",
-    component: () => import("@/App.vue")
-
-  },
-  {
-    path: "/login",
     name: "login",
     component: () => import("@/components/login.vue")
 
+  },
+  {
+    path: "/rightTable",
+    name: "rightTable",
+    component: () => import("@/components/RightTable.vue")
   },
   {
     path: '/about',

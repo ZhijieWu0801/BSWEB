@@ -52,12 +52,6 @@
   <script>
 import leftNavlist from "@/js/leftNavlist";
 export default {
-  props: {
-    navList: {
-      type: Array,
-      default: () => [],
-    },
-  },
   components: {},
   data() {
     return {

@@ -1,8 +1,8 @@
 const leftNavRouter = [
     {
-    path: "/",
-    name: "app",
-    component: () => import("@/App.vue")
+    path: "/petInbound",
+    name: "petInbound",
+    component: () => import("@/components/petInbound.vue")
 }, 
 ]
 

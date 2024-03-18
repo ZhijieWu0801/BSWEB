@@ -1,34 +1,45 @@
 <template>
   <div id="app">
     <div class="appBody">
-
-      <leftNav :navList="navList"></leftNav>
-      <router-view class="view"/>
-      <button @click="change">qiehuan</button>
+      <template v-if="!isLogin">
+        <login @login="login" />
+      </template>
+      <template v-else>
+        <leftNav></leftNav>
+        <router-view class="view" />
+        <!-- <button @click="change">qiehuan</button> -->
+      </template>
     </div>
   </div>
 </template>
 <script>
 import leftNav from "@/components/leftNav.vue";
+import login from "@/components/login.vue";
 export default {
   components: {
     leftNav,
+    login,
   },
   data() {
     return {
-      navList: [123456,456,12654],
+      isLogin: false,
     };
   },
-  methods:{
-    change(){
+  mounted() {},
+  methods: {
+    login() {
+      this.isLogin = true;
+      this.$router.push({ path: "/about" });
+    },
+    change() {
       console.log(111);
-      this.$router.push({path:"/about"})
-    }
-  }
+      this.$router.push({ path: "/about" });
+    },
+  },
 };
 </script>
 <style lang="scss">
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -40,13 +51,13 @@ export default {
   text-align: center;
   color: #2c3e50;
   height: 100vh;
-  .appBody{
+  .appBody {
     display: flex;
     height: 100%;
-    .leftNav{
+    .leftNav {
       flex: 0 1 15%;
     }
-    .view{
+    .view {
       flex: 1 1;
     }
   }

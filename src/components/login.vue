@@ -1,13 +1,22 @@
 <template>
-  <div class="loginContainer">aaaaaaaaaaaa</div>
+  <div class="loginContainer">
+    <button @click="login">登录</button>
+    aaaaaaaaaaaa
+  </div>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    login() {
+      this.$emit("login");
+    },
+  },
+};
 </script>
 
 <style>
-.loginContainer{
-  /* width: 100%; */
+.loginContainer {
+  width: 100%;
 }
 </style>

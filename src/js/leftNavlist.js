@@ -4,11 +4,12 @@ const leftNavList = [{
         child: [{
                 index: "1-1",
                 lable: "猫",
-                path: "/login"
+                path: "/rightTable"
             },
             {
                 index: "1-2",
-                lable: "狗"
+                lable: "狗",
+                path: "/rightTable",
             },
         ],
     },
@@ -34,7 +35,7 @@ const leftNavList = [{
         }, ]
     }, {
         index: "3",
-        path: "/",
+        path: "/petInbound",
         lable: "动物入站",
     }, {
         index: "4",
