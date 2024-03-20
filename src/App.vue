@@ -22,14 +22,15 @@ export default {
   },
   data() {
     return {
-      isLogin: false,
+      isLogin: true,
     };
   },
   mounted() {},
   methods: {
-    login() {
-      this.isLogin = true;
-      this.$router.push({ path: "/about" });
+    login(r) {
+      console.log(r);
+      this.isLogin = r;
+      this.isLogin && this.$router.push({ path: "/about" });
     },
     change() {
       console.log(111);

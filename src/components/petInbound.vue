@@ -5,7 +5,6 @@
       @Cancel="CancelHandle"
       :cancelText="cancelText"
       :title="title"
-      :mask="true"
     >
       <template>
         <div class="slotContainer">

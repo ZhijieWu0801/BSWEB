@@ -65,12 +65,22 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     },
-    clickHandle(item){
-        console.log(item,"-------");
-        //item 里面携带path 做路由跳转，渲染组件
-        item.path && this.$router.push({path:item.path})
-    }
-
+    clickHandle(item) {
+      // console.log(item, "-------", {
+      //   path: item.path,
+      //   params: { type: item.type },
+      // });
+      //item 里面携带path 做路由跳转，渲染组件
+      const path = item.type ? item.path + item.type : item.path;
+      console.log(path,"=====",this.$route.path);
+      if(this.$route.path ===path){
+        return
+      }
+      item.path &&
+        this.$router.push({
+          path: path,
+        });
+    },
   },
 };
 </script>

@@ -4,12 +4,14 @@ const leftNavList = [{
         child: [{
                 index: "1-1",
                 lable: "猫",
-                path: "/rightTable"
+                path: "/rightTable",
+                type:"cat"
             },
             {
                 index: "1-2",
                 lable: "狗",
                 path: "/rightTable",
+                type:"dog"
             },
         ],
     },
@@ -18,19 +20,19 @@ const leftNavList = [{
         index: "2",
         child: [{
             index: "2-1",
-            path: "/",
+            path: "/addAdmin",
             lable: "添加员工",
         }, {
             index: "2-2",
-            path: "/",
+            path: "/deleteAdmin",
             lable: "删除员工",
         }, {
             index: "2-3",
-            path: "/",
+            path: "/updataAdmin",
             lable: "修改员工信息",
         }, {
             index: "2-4",
-            path: "/",
+            path: "/selectAdmin",
             lable: "查询员工信息",
         }, ]
     }, {
@@ -39,15 +41,15 @@ const leftNavList = [{
         lable: "动物入站",
     }, {
         index: "4",
-        path: "/",
+        path: "/animalExit",
         lable: "动物出站",
     }, {
         index: "5",
-        path: "/",
+        path: "/petAdopt",
         lable: "动物领养",
     }, {
         index: "6",
-        path: "/",
+        path: "/returnPet",
         lable: "动物归还",
     }
 ]

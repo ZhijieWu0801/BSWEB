@@ -6,7 +6,7 @@
         <div class="titleText">
           {{ title }}
         </div>
-        <div class="close" v-if="close" @click.stop="close">
+        <div class="close" v-if="close" @click.stop="Close">
           <img src="" alt="" srcset="" />
         </div>
       </div>
@@ -51,7 +51,7 @@ export default {
     Ok() {
       this.$emit("Ok");
     },
-    close() {},
+    Close() {},
   },
 };
 </script>
