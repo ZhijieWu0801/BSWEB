@@ -1,5 +1,6 @@
 <template>
   <div class="dialogContainer">
+    <div class="notClickMask" v-if="showNotClickMask"></div>
     <div v-if="mask" class="mask"></div>
     <div class="body">
       <div class="title">
@@ -43,6 +44,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    showNotClickMask: {
+      type: Boolean,
+      default: false,
+    },
   },
   methods: {
     Cancel() {
@@ -59,6 +64,12 @@ export default {
 <style lang="scss">
 .dialogContainer {
   position: relative;
+  .notClickMask{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #00000046;
+  }
   .mask {
     position: fixed;
     width: 100vw;

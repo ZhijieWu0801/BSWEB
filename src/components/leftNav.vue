@@ -4,6 +4,7 @@
       <el-col :span="24">
         <h5>自定义颜色</h5>
         <el-menu
+          unique-opened
           default-active="2"
           class="el-menu-vertical-demo"
           @open="handleOpen"
@@ -72,9 +73,9 @@ export default {
       // });
       //item 里面携带path 做路由跳转，渲染组件
       const path = item.type ? item.path + item.type : item.path;
-      console.log(path,"=====",this.$route.path);
-      if(this.$route.path ===path){
-        return
+      console.log(path, "=====", this.$route.path);
+      if (this.$route.path === path) {
+        return;
       }
       item.path &&
         this.$router.push({

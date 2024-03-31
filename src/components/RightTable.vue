@@ -1,240 +1,86 @@
 <template>
   <div class="righttTeble">
+    <button @click="aaa">查询</button>
     <tables :tableData="tableData" :tableTitle="tableTitle"></tables>
   </div>
 </template>
 
 <script>
 import tables from "@/components/Table.vue";
+const typeMap = {
+  cat: "M",
+  dog: "D",
+};
+const TableMap = {
+  id: "id",
+  PName: "宠物名字",
+  species: "宠物种类",
+  serial: "宠物编号",
+  //   APwd: "密码",
+  petMaster: "宠物主人",
+  // Tissue: "组织",
+  // ABirth: "生日",
+};
 export default {
   components: {
     tables,
   },
   data() {
-    const tableData = [
-      {
-        aaa: "数据1",
-        2: "数据2",
-        3: "数据3",
-        4: "数据4",
-        5: "数据5",
-        6: "数据6",
-        7: "数据7",
-      },
-      {
-        aaa: "数据1",
-        2: "数据2",
-        3: "数据3",
-        4: "数据4",
-        5: "数据5",
-        6: "数据6",
-        7: "数据7",
-      },
-      {
-        aaa: "数据1",
-        2: "数据2",
-        3: "数据3",
-        4: "数据4",
-        5: "数据5",
-        6: "数据6",
-        7: "数据7",
-      },
-      {
-        aaa: "数据1",
-        2: "数据2",
-        3: "数据3",
-        4: "数据4",
-        5: "数据5",
-        6: "数据6",
-        7: "数据7",
-      },
-      {
-        aaa: "数据1",
-        2: "数据2",
-        3: "数据3",
-        4: "数据4",
-        5: "数据5",
-        6: "数据6",
-        7: "数据7",
-      },
-      {
-        aaa: "数据1",
-        2: "数据2",
-        3: "数据3",
-        4: "数据4",
-        5: "数据5",
-        6: "数据6",
-        7: "数据7",
-      },
-      {
-        aaa: "数据1",
-        2: "数据2",
-        3: "数据3",
-        4: "数据4",
-        5: "数据5",
-        6: "数据6",
-        7: "数据7",
-      },
-      {
-        aaa: "数据1",
-        2: "数据2",
-        3: "数据3",
-        4: "数据4",
-        5: "数据5",
-        6: "数据6",
-        7: "数据7",
-      },
-      {
-        aaa: "数据1",
-        2: "数据2",
-        3: "数据3",
-        4: "数据4",
-        5: "数据5",
-        6: "数据6",
-        7: "数据7",
-      },
-      {
-        aaa: "数据1",
-        2: "数据2",
-        3: "数据3",
-        4: "数据4",
-        5: "数据5",
-        6: "数据6",
-        7: "数据7",
-      },
-      {
-        aaa: "数据1",
-        2: "数据2",
-        3: "数据3",
-        4: "数据4",
-        5: "数据5",
-        6: "数据6",
-        7: "数据7",
-      },
-      {
-        aaa: "数据1",
-        2: "数据2",
-        3: "数据3",
-        4: "数据4",
-        5: "数据5",
-        6: "数据6",
-        7: "数据7",
-      },
-      {
-        aaa: "数据1",
-        2: "数据2",
-        3: "数据3",
-        4: "数据4",
-        5: "数据5",
-        6: "数据6",
-        7: "数据7",
-      },
-      {
-        aaa: "数据1",
-        2: "数据2",
-        3: "数据3",
-        4: "数据4",
-        5: "数据5",
-        6: "数据6",
-        7: "数据7",
-      },
-      {
-        aaa: "数据1",
-        2: "数据2",
-        3: "数据3",
-        4: "数据4",
-        5: "数据5",
-        6: "数据6",
-        7: "数据7",
-      },
-      {
-        aaa: "数据1",
-        2: "数据2",
-        3: "数据3",
-        4: "数据4",
-        5: "数据5",
-        6: "数据6",
-        7: "数据7",
-      },
-      {
-        aaa: "数据1",
-        2: "数据2",
-        3: "数据3",
-        4: "数据4",
-        5: "数据5",
-        6: "数据6",
-        7: "数据7",
-      },
-      {
-        aaa: "数据1",
-        2: "数据2",
-        3: "数据3",
-        4: "数据4",
-        5: "数据5",
-        6: "数据6",
-        7: "数据7",
-      },
-      {
-        aaa: "数据1",
-        2: "数据2",
-        3: "数据3",
-        4: "数据4",
-        5: "数据5",
-        6: "数据6",
-        7: "数据7",
-      },
-      {
-        aaa: "数据1",
-        2: "数据2",
-        3: "数据3",
-        4: "数据4",
-        5: "数据5",
-        6: "数据6",
-        7: "数据7",
-      },
-    ];
+    const tableData = [];
 
-    const tableTitle = [
-      {
-        prop: "aaa",
-        label: "bbb",
-        // width: "150",
-      },
-      {
-        prop: "2",
-        label: "ccc",
-        // width: "150",
-      },
-      {
-        prop: "3",
-        label: "ddd",
-        // width: "150",
-      },
-      {
-        prop: "4",
-        label: "eee",
-        // width: "150",
-      },
-      {
-        prop: "5",
-        label: "fff",
-        // width: "150",
-      },
-      {
-        prop: "6",
-        label: "ggg",
-        // width: "150",
-      },
-      {
-        prop: "7",
-        label: "bbb",
-        // width: "150",
-      },
-    ];
+    const tableTitle = [];
+    const species = this.$route.params.species;
     return {
       tableData,
       tableTitle,
     };
+  },
+  mounted() {},
+  methods: {
+    initTable() {
+      this.tableData = [];
+      this.tableTitle = [];
+    },
+    aaa() {
+      this.initTable()
+      const data = {
+        species: this.$route.params.species,
+      };
+      this.$axios
+        .post(`${this.$baseUrl}/api/pet/getAllPetByType`, data)
+        .then((r) => {
+          console.log(r.data);
+          // console.log(r.data);
+          for (const key in r.data.data[0]) {
+            //   console.log(key);
+            TableMap[key] &&
+              this.tableTitle.push({
+                prop: TableMap[key],
+                label: TableMap[key],
+              });
+          }
+          console.log(this.tableTitle, typeof r.data);
+          r.data.data.map((r) => {
+            // console.log(r);
+            const data = {};
+            for (const key in r) {
+              // console.log(key);
+              if (key === "petMaster") {
+                // console.log(r);
+                TableMap[key] &&
+                  (data[TableMap[key]] = r[key] ? r[key].MPName : "暂无");
+
+                break;
+              }
+              TableMap[key] && (data[TableMap[key]] = r[key]);
+            }
+            // console.log(data,"-----------");
+            this.tableData.push(data);
+          });
+          // console.log(this.tableData, 111111111);
+        });
+      // console.log(this.$route.params.species);
+    },
   },
 };
 </script>

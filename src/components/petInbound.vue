@@ -41,6 +41,9 @@
 import Dialogs from "@/components/Dialog.vue";
 export default {
   data() {
+    serialMap={
+      
+    };
     return {
       title: "动物入站",
       cancelText: "清空",

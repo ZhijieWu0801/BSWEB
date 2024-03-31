@@ -3,9 +3,7 @@
     <Dialogs @Ok="okHandle" @Cancel="CancelHandle" :title="title">
       <template>
         <div class="slotContainer">
-          <div>
-            <span>管理员电话</span><input type="text" v-model="serial" />
-          </div>
+          <div><span>管理员电话</span><input type="text" v-model="tel" /></div>
           <div>删除原因</div>
           <textarea
             name=""
@@ -30,13 +28,22 @@ export default {
   data() {
     return {
       title: "删除管理员",
-      serial: "",
+      tel: "",
       textarea: "",
     };
   },
   methods: {
-    CancelHandle() {},
-    okHandle() {},
+    CancelHandle() {
+      this.tel = "";
+      this.textarea = "";
+    },
+    okHandle() {
+      const data = {
+        tel: this.tel,
+        msg: this.textarea,
+      };
+      this.$axios.post(`${this.$baseUrl}/api/admin/deleteAdminByTel`, data);
+    },
   },
 };
 </script>

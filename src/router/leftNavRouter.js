@@ -1,15 +1,15 @@
 const leftNavRouter = [{
-        path: "/rightTabledog",
+        path: "/rightTable/:species",
         name: "rightTabledog",
         component: () => import("@/components/RightTable.vue"),
         props: true
     },
-    {
-        path: "/rightTablecat",
-        name: "rightTablecat",
-        component: () => import("@/components/RightTable.vue"),
-        props: true
-    },
+    // {
+    //     path: "/rightTablecat",
+    //     name: "rightTablecat",
+    //     component: () => import("@/components/RightTable.vue"),
+    //     props: true
+    // },
     {
         path: "/petInbound",
         name: "petInbound",
@@ -55,7 +55,19 @@ const leftNavRouter = [{
     {
         path: "/selectAdmin",
         name: "selectAdmin",
-        component: () => import("@/components/admin/AddAdmin.vue"),
+        component: () => import("@/components/admin/SelectAdmin.vue"),
+        props: true
+    },
+    {
+        path: "/allAdmin",
+        name: "allAdmin",
+        component: () => import("@/components/admin/allAdmin.vue"),
+        props: true
+    },
+    {
+        path: "/myInfo",
+        name: "myInfo",
+        component: () => import("@/components/admin/MyInfo.vue"),
         props: true
     },
 ]

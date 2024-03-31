@@ -1,5 +1,40 @@
 <template>
   <div class="petInboundContainer">
+    <Dialogs
+      @Ok="okHandle"
+      @Cancel="CancelHandle"
+      :cancelText="cancelText"
+      :title="title"
+    >
+      <template>
+        <div class="slotContainer">
+          <div
+            class="itemContainer"
+            v-for="(item, index) in renderList"
+            :key="index"
+          >
+            <span class="itemText"> {{ item.lable }}：</span>
+
+            <input
+              v-if="item.type !== 'select'"
+              class="itemInput"
+              :type="item.type"
+              v-model="renderList[index].value"
+            />
+            <select v-else name="" id="" v-model="renderList[index].value">
+              <option
+                :value="opt.value"
+                v-for="(opt, i) in item.child"
+                :key="i"
+              >
+                {{ opt.lable }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <button @click="getAdminInfoByTel">aaaa</button>
+      </template>
+    </Dialogs>
     <tables :tableData="tableData" :tableTitle="tableTitle"></tables>
   </div>
 </template>
@@ -20,7 +55,7 @@ const TableMap = {
 export default {
   data() {
     return {
-      // title: "查询员工",
+      title: "查询员工",
       cancelText: "清空",
       selectAdminData: {},
       renderList: [
@@ -46,36 +81,37 @@ export default {
     Dialogs,
     Tables,
   },
-  mounted(){
-    this.getAllAdminInfo()
-  },
   methods: {
-    getAllAdminInfo() {
-      this.$axios
-        .post(`${this.$baseUrl}/api/admin/getAllAdmin`, this.selectAdminData)
-        .then((r) => {
-          // console.log(r.data.data);
-          for (const key in r.data.data[0]) {
-            //   console.log(key);
-            TableMap[key] &&
-              this.tableTitle.push({
-                prop: TableMap[key],
-                label: TableMap[key],
-              });
-          }
-          console.log(this.tableTitle);
-          r.data.data.map((r) => {
-            // console.log(r);
-            const data = {};
-            for (const key in r) {
-              // console.log(key);
-              TableMap[key] && (data[TableMap[key]] = r[key]);
-            }
-            // console.log(data,"-----------");
-            this.tableData.push(data);
-          });
-        });
+    initTable() {
+      this.tableTitle = [];
+      this.tableData = [];
     },
+    // getAllAdminInfo() {
+    //   this.$axios
+    //     .post(`${this.$baseUrl}/api/admin/getAllAdmin`, this.selectAdminData)
+    //     .then((r) => {
+    //       // console.log(r.data.data);
+    //       for (const key in r.data.data[0]) {
+    //         //   console.log(key);
+    //         TableMap[key] &&
+    //           this.tableTitle.push({
+    //             prop: TableMap[key],
+    //             label: TableMap[key],
+    //           });
+    //       }
+    //       console.log(this.tableTitle);
+    //       r.data.data.map((r) => {
+    //         // console.log(r);
+    //         const data = {};
+    //         for (const key in r) {
+    //           // console.log(key);
+    //           TableMap[key] && (data[TableMap[key]] = r[key]);
+    //         }
+    //         // console.log(data,"-----------");
+    //         this.tableData.push(data);
+    //       });
+    //     });
+    // },
     okHandle() {
       // console.log(this.renderList);
       this.selectAdminData = {
@@ -87,7 +123,7 @@ export default {
         //   pwd: this.renderList[5].value,
         //   birth: this.renderList[6].value,
       };
-      this.getAllAdminInfo();
+      this.getAdminInfoByTel();
     },
     CancelHandle() {
       // 取消清除数据
@@ -108,12 +144,14 @@ export default {
         //   pwd: this.renderList[5].value,
         //   birth: this.renderList[6].value,
       };
+      console.log(1111);
+      this.initTable()
       this.$axios
         .post(`${this.$baseUrl}/api/admin/getAdminByTel`, this.selectAdminData)
         .then((r) => {
           console.log(r.data.data);
-          if(!r.data.data){
-            return
+          if (!r.data.data) {
+            return;
           }
           for (const key in r.data.data) {
             //   console.log(key);
