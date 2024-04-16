@@ -2,7 +2,7 @@
   <div class="leftNav">
     <el-row class="tac">
       <el-col :span="24">
-        <h5>自定义颜色</h5>
+        <!-- <h5>自定义颜色</h5> -->
         <el-menu
           unique-opened
           default-active="2"
@@ -86,7 +86,23 @@ export default {
 };
 </script>
   
-  <style>
+  <style scoped>
 /* 这里是样式 */
+*{
+  user-select: none;
+
+}
+</style>
+<style lang="less">
+.tac{
+  height: 100%;
+  .el-col{
+    height: 100%;
+    .el-menu{
+      height: 100%;
+      
+    }
+  }
+}
 </style>
   

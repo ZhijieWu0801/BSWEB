@@ -5,12 +5,13 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    ID:"",
+    ID: "",
     TEL: "",
     NAME: '',
     LIMIT: '',
     TISSUE: '',
     BIRTH: '',
+    LOGING:false,
   },
   getters: {
     getId: state => {
@@ -31,6 +32,9 @@ export default new Vuex.Store({
     getBirth: state => {
       return state.BIRTH
     },
+    getLoging: state=>{
+      return state.LOGING
+    }
   },
   mutations: {
     setId: (state, value) => {
@@ -51,25 +55,45 @@ export default new Vuex.Store({
     setBirth: (state, value) => {
       state.BIRTH = value
     },
+    setLoging: (state, value) => {
+      state.LOGING = !!value
+    }
   },
   actions: {
-    updataId: ({ commit }, value) => {
-      commit ("setId",value)
+    updataId: ({
+      commit
+    }, value) => {
+      commit("setId", value)
     },
-    updataName: ({ commit }, value) => {
-      commit ("setName",value)
+    updataName: ({
+      commit
+    }, value) => {
+      commit("setName", value)
     },
-    updataTel: ({ commit }, value) => {
-      commit ("setTel",value)
+    updataTel: ({
+      commit
+    }, value) => {
+      commit("setTel", value)
     },
-    updataLimit: ({ commit }, value) => {
-      commit ("setLimit",value)
+    updataLimit: ({
+      commit
+    }, value) => {
+      commit("setLimit", value)
     },
-    updataTissue: ({ commit }, value) => {
-      commit ("setTissue",value)
+    updataTissue: ({
+      commit
+    }, value) => {
+      commit("setTissue", value)
     },
-    updataBirth: ({ commit }, value) => {
-      commit ("setBirth",value)
+    updataBirth: ({
+      commit
+    }, value) => {
+      commit("setBirth", value)
+    },
+    updataLoging: ({
+      commit
+    }, value) => {
+      commit("setLoging", value)
     },
   },
   modules: {}

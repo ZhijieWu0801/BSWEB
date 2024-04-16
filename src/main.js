@@ -6,10 +6,20 @@ import './element.js';
 import baseUrlPlugin from "@/plugins/baseUrlPlugin.js";
 import debouncePlugin from "@/plugins/debouncePlugin.js";
 import axiosPlugin from "@/plugins/axiosPlugin.js";
+import testTel from "@/plugins/testTel.js";
+import loading from "@/Directive/loadingDirective"
+
+
+
+
+const {Message} = require("element-ui")
+Vue.prototype.$Message = Message
 Vue.config.productionTip = false
 Vue.use(baseUrlPlugin);
 Vue.use(axiosPlugin);
+Vue.use(testTel);
 Vue.use(debouncePlugin);
+Vue.use(loading);
 new Vue({
   router,
   store,
