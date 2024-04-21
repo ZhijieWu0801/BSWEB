@@ -1,7 +1,8 @@
 // plugins/config.js
 const configPlugin = {
     install(Vue) {
-      Vue.prototype.$baseUrl = 'http://192.168.2.109:3000'
+      // Vue.prototype.$baseUrl = 'http://192.168.2.109:3000'
+      Vue.prototype.$baseUrl = 'http://localhost:3000'
     },
   };
   

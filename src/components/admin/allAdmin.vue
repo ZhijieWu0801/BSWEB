@@ -1,144 +1,142 @@
 <template>
-  <div class="petInboundContainer">
-    <tables :tableData="tableData" :tableTitle="tableTitle"></tables>
-  </div>
+    <div class="petInboundContainer">
+        <tables
+            :tableData="table.tableData"
+            :tableTitle="table.tableTitle"
+        ></tables>
+    </div>
 </template>
     
-    <script>
+<script>
 import Dialogs from "@/components/Dialog.vue";
 import Tables from "@/components/Table.vue";
 
+import { getAllAdmin, getAdminByTel } from "@/api/Api.js";
 const TableMap = {
-  AName: "姓名",
-  ATel: "电话",
-  AAddress: "地址",
-  //   APwd: "密码",
-  Limit: "权限",
-  Tissue: "组织",
-  ABirth: "生日",
+    AName: "姓名",
+    ATel: "电话",
+    AAddress: "地址",
+    //   APwd: "密码",
+    Limit: "权限",
+    Tissue: "组织",
+    ABirth: "生日",
 };
 export default {
-  data() {
-    return {
-      // title: "查询员工",
-      cancelText: "清空",
-      selectAdminData: {},
-      renderList: [
-        { lable: "管理员电话", value: "", type: "text" },
-        //   { lable: "管理员名字", value: "", type: "text" },
-        //   { lable: "管理员权限", value: "", type: "text" },
-        //   { lable: "管理员组织", value: "", type: "text" },
-        //   { lable: "管理员地址", value: "", type: "text" },
-        //   { lable: "管理员密码", value: "", type: "text" },
-        //   { lable: "管理员生日", value: "", type: "datetime-local" },
-      ],
-      // verifyTel:'',
-      passValidation: false, //判断是否通过了验证
-      showNotClickMask: true, //有没有禁用遮罩
-      debounceFunc: null,
-      info: {},
-      //   tableTitle: ["姓名", "", ""],
-      tableTitle: [],
-      tableData: [],
-    };
-  },
-  components: {
-    Dialogs,
-    Tables,
-  },
-  mounted(){
-    this.getAllAdminInfo()
-  },
-  methods: {
-    getAllAdminInfo() {
-      this.$axios
-        .post(`${this.$baseUrl}/api/admin/getAllAdmin`, this.selectAdminData)
-        .then((r) => {
-          // console.log(r.data.data);
-          for (const key in r.data.data[0]) {
-            //   console.log(key);
-            TableMap[key] &&
-              this.tableTitle.push({
-                prop: TableMap[key],
-                label: TableMap[key],
-              });
-          }
-          console.log(this.tableTitle);
-          r.data.data.map((r) => {
-            // console.log(r);
-            const data = {};
-            for (const key in r) {
-              // console.log(key);
-              TableMap[key] && (data[TableMap[key]] = r[key]);
-            }
-            // console.log(data,"-----------");
-            this.tableData.push(data);
-          });
-        });
+    data() {
+        return {
+            // title: "查询员工",
+            cancelText: "清空",
+            selectAdminData: {},
+            renderList: [
+                { lable: "管理员电话", value: "", type: "text" },
+                //   { lable: "管理员名字", value: "", type: "text" },
+                //   { lable: "管理员权限", value: "", type: "text" },
+                //   { lable: "管理员组织", value: "", type: "text" },
+                //   { lable: "管理员地址", value: "", type: "text" },
+                //   { lable: "管理员密码", value: "", type: "text" },
+                //   { lable: "管理员生日", value: "", type: "datetime-local" },
+            ],
+            // verifyTel:'',
+            passValidation: false, //判断是否通过了验证
+            showNotClickMask: true, //有没有禁用遮罩
+            debounceFunc: null,
+            info: {},
+            //   tableTitle: ["姓名", "", ""],
+            table: {
+                tableTitle: [],
+                tableData: [],
+            },
+        };
     },
-    okHandle() {
-      // console.log(this.renderList);
-      this.selectAdminData = {
-        tel: this.renderList[0].value,
-        //   name: this.renderList[1].value,
-        //   limit: this.renderList[2].value,
-        //   tissue: this.renderList[3].value,
-        //   address: this.renderList[4].value,
-        //   pwd: this.renderList[5].value,
-        //   birth: this.renderList[6].value,
-      };
-      this.getAllAdminInfo();
+    components: {
+        Dialogs,
+        Tables,
     },
-    CancelHandle() {
-      // 取消清除数据
-      this.renderList.forEach((item) => {
-        item.value = null;
-      });
+    mounted() {
+        this.getAllAdminInfo();
     },
+    methods: {
+        getAllAdminInfo() {
+            const data = {
+                page: this.page,
+                pageSize: this.pageSize,
+            };
+            getAllAdmin(data).then((r) => {
+                for (const key in r.data.data[0]) {
+                    TableMap[key] &&
+                        this.table.tableTitle.push({
+                            prop: TableMap[key],
+                            label: TableMap[key],
+                        });
+                }
+                console.log(this.table.tableTitle);
+                r.data.data.map((r) => {
+                    // console.log(r);
+                    const data = {};
+                    for (const key in r) {
+                        // console.log(key);
+                        TableMap[key] && (data[TableMap[key]] = r[key]);
+                    }
+                    // console.log(data,"-----------");
+                    this.table.tableData.push(data);
+                });
+            });
+        },
+        okHandle() {
+            // console.log(this.renderList);
+            this.selectAdminData = {
+                tel: this.renderList[0].value,
+                //   name: this.renderList[1].value,
+                //   limit: this.renderList[2].value,
+                //   tissue: this.renderList[3].value,
+                //   address: this.renderList[4].value,
+                //   pwd: this.renderList[5].value,
+                //   birth: this.renderList[6].value,
+            };
+            this.getAllAdminInfo();
+        },
+        CancelHandle() {
+            // 取消清除数据
+            this.renderList.forEach((item) => {
+                item.value = null;
+            });
+        },
 
-    getAdminInfoByTel() {
-      this.tableTitle = [];
-      this.tableData = [];
-      this.selectAdminData = {
-        tel: this.renderList[0].value,
-        //   name: this.renderList[1].value,
-        //   limit: this.renderList[2].value,
-        //   tissue: this.renderList[3].value,
-        //   address: this.renderList[4].value,
-        //   pwd: this.renderList[5].value,
-        //   birth: this.renderList[6].value,
-      };
-      this.$axios
-        .post(`${this.$baseUrl}/api/admin/getAdminByTel`, this.selectAdminData)
-        .then((r) => {
-          console.log(r.data.data);
-          if(!r.data.data){
-            return
-          }
-          for (const key in r.data.data) {
-            //   console.log(key);
-            TableMap[key] &&
-              this.tableTitle.push({
-                prop: TableMap[key],
-                label: TableMap[key],
-              });
-          }
-          console.log(this.tableTitle);
-          // r.data.data.map((r) => {
-          //   // console.log(r);
-          const data = {};
-          for (const key in r.data.data) {
-            // console.log(key);
-            TableMap[key] && (data[TableMap[key]] = r.data.data[key]);
-          }
-          console.log(data, "-----------");
-          this.tableData.push(data);
-          // });
-        });
+        getAdminInfoByTel() {
+            this.table.tableTitle = [];
+            this.table.tableData = [];
+            this.selectAdminData = {
+                tel: this.renderList[0].value,
+                //   name: this.renderList[1].value,
+                //   limit: this.renderList[2].value,
+                //   tissue: this.renderList[3].value,
+                //   address: this.renderList[4].value,
+                //   pwd: this.renderList[5].value,
+                //   birth: this.renderList[6].value,
+            };
+            getAdminByTel(this.selectAdminData).then((r) => {
+                console.log(r.data.data);
+                if (!r.data.data) {
+                    return;
+                }
+                for (const key in r.data.data) {
+                    TableMap[key] &&
+                        this.table.tableTitle.push({
+                            prop: TableMap[key],
+                            label: TableMap[key],
+                        });
+                }
+                // console.log(this.table.tableTitle);
+                const data = {};
+                for (const key in r.data.data) {
+                    TableMap[key] && (data[TableMap[key]] = r.data.data[key]);
+                }
+                this.table.tableData.push(data);
+            });
+        },
     },
-  },
 };
 </script>
     
-    <style lang="scss">
+<style lang="scss">
 </style>

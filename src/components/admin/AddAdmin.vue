@@ -38,6 +38,7 @@
   </template>
   
   <script>
+import { createAdmin } from "@/api/Api.js";
   import Dialogs from "@/components/Dialog.vue";
   export default {
     data() {
@@ -71,7 +72,8 @@
           pwd: this.renderList[5].value,
           birth: this.renderList[6].value,
         };
-        this.$axios.post(`${this.$baseUrl}/api/admin/createAdmin`, this.addAdminData);
+        // this.$axios.post(`${this.$baseUrl}/api/admin/createAdmin`, this.addAdminData);
+        createAdmin(this.addAdminData);
       },
       CancelHandle() {
         // 取消清除数据

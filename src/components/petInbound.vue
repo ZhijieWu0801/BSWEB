@@ -54,6 +54,7 @@
 </template>
 
 <script>
+import { forecastByPy, addPet } from "@/api/Api.js";
 import Dialogs from "@/components/Dialog.vue";
 export default {
     data() {
@@ -101,11 +102,15 @@ export default {
             reader.readAsDataURL(file);
         },
         convertImageToBase64() {
-            // 这里可以发送 base64Image 到后端处理
-            this.$axios.post(`${this.$baseUrl}/api/serve/PY`, {
+            const data = {
                 image: this.base64Image,
-            });
-            console.log("Base64 Image:", { aaa: this.base64Image });
+            };
+            // 这里可以发送 base64Image 到后端处理
+            // this.$axios.post(`${this.$baseUrl}/api/serve/PY`, {
+            //     image: this.base64Image,
+            // });
+            forecastByPy(data);
+            // console.log("Base64 Image:", { aaa: this.base64Image });
         },
         okHandle() {
             console.log(this.renderList);
@@ -115,11 +120,13 @@ export default {
                 name: this.renderList[2].value,
                 master: this.renderList[3].value,
             };
-            this.$axios.post(
-                `${this.$baseUrl}/api/pet/addPet`,
-                this.addpetData
-            );
+            addPet.post(this.addpetData);
         },
+        //     this.$axios.post(
+        //         `${this.$baseUrl}/api/pet/addPet`,
+        //         this.addpetData
+        //     );
+        // },
         CancelHandle() {
             // 取消清除数据
             this.renderList.forEach((item) => {

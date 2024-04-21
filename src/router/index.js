@@ -3,8 +3,8 @@ import VueRouter from 'vue-router'
 // import HomeView from '../views/HomeView.vue'
 import leftNavRouter from "routerPath/leftNavRouter"
 Vue.use(VueRouter)
-console.log(leftNavRouter);
-console.log([...leftNavRouter]);
+// console.log(leftNavRouter);
+// console.log([...leftNavRouter]);
 
 const routes = [
   // {

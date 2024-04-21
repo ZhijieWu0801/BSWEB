@@ -1,6 +1,6 @@
 <template>
     <div id="app" v-loading="isLoging">
-        <div @click="aaaa">aaaaaa</div>
+        <!-- <div @click="aaaa">aaaaaa</div> -->
         <div class="appBody" v-if="true">
             <template v-if="!isLogin">
                 <login @login="login" />
@@ -28,7 +28,8 @@ export default {
     },
     data() {
         return {
-            isLogin: !!localStorage.getItem("token") || false,
+           // isLogin: !!localStorage.getItem("token") || false,
+            isLogin:  false,
             isLoging: false,
             base64Image: "",
         };
@@ -80,6 +81,7 @@ export default {
 };
 </script>
 <style lang="scss">
+@import url("@/less/common.less");
 * {
     margin: 0;
     padding: 0;

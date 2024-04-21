@@ -1,4 +1,5 @@
 // debouncePlugin.js
+//防抖函数
 
 const debouncePlugin = {
   install(Vue) {

@@ -42,6 +42,7 @@
     <script>
 import Dialogs from "@/components/Dialog.vue";
 import Tables from "@/components/Table.vue";
+import { getAdminByTel } from "@/api/Api.js";
 
 const TableMap = {
   AName: "姓名",
@@ -86,32 +87,7 @@ export default {
       this.tableTitle = [];
       this.tableData = [];
     },
-    // getAllAdminInfo() {
-    //   this.$axios
-    //     .post(`${this.$baseUrl}/api/admin/getAllAdmin`, this.selectAdminData)
-    //     .then((r) => {
-    //       // console.log(r.data.data);
-    //       for (const key in r.data.data[0]) {
-    //         //   console.log(key);
-    //         TableMap[key] &&
-    //           this.tableTitle.push({
-    //             prop: TableMap[key],
-    //             label: TableMap[key],
-    //           });
-    //       }
-    //       console.log(this.tableTitle);
-    //       r.data.data.map((r) => {
-    //         // console.log(r);
-    //         const data = {};
-    //         for (const key in r) {
-    //           // console.log(key);
-    //           TableMap[key] && (data[TableMap[key]] = r[key]);
-    //         }
-    //         // console.log(data,"-----------");
-    //         this.tableData.push(data);
-    //       });
-    //     });
-    // },
+
     okHandle() {
       // console.log(this.renderList);
       this.selectAdminData = {
@@ -146,10 +122,9 @@ export default {
       };
       console.log(1111);
       this.initTable()
-      this.$axios
-        .post(`${this.$baseUrl}/api/admin/getAdminByTel`, this.selectAdminData)
+      getAdminByTel(this.selectAdminData)
         .then((r) => {
-          console.log(r.data.data);
+          // console.log(r.data.data);
           if (!r.data.data) {
             return;
           }
@@ -162,8 +137,6 @@ export default {
               });
           }
           console.log(this.tableTitle);
-          // r.data.data.map((r) => {
-          //   // console.log(r);
           const data = {};
           for (const key in r.data.data) {
             // console.log(key);
@@ -171,7 +144,6 @@ export default {
           }
           console.log(data, "-----------");
           this.tableData.push(data);
-          // });
         });
     },
   },
