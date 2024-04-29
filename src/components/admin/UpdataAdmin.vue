@@ -64,13 +64,13 @@ export default {
             cancelText: "清空",
             addAdminData: {},
             renderList: [
-                { lable: "管理员电话", value: "", type: "text" },
-                { lable: "管理员名字", value: "", type: "text" },
-                { lable: "管理员权限", value: "", type: "text" },
-                { lable: "管理员组织", value: "", type: "text" },
-                { lable: "管理员地址", value: "", type: "text" },
-                { lable: "管理员密码", value: "", type: "text" },
-                { lable: "管理员生日", value: "", type: "datetime-local" },
+                { lable: "管理员电话", tip:"电话", value: "", type: "text" },
+                { lable: "管理员名字", tip:"名字", value: "", type: "text" },
+                { lable: "管理员权限", tip:"权限", value: "", type: "text" },
+                { lable: "管理员组织", tip:"组织", value: "", type: "text" },
+                { lable: "管理员地址", tip:"地址", value: "", type: "text" },
+                { lable: "管理员密码", tip:"密码", value: "", type: "text" },
+                { lable: "管理员生日", tip:"生日", value: "", type: "datetime-local" },
             ],
             // verifyTel:'',
             passValidation: false, //判断是否通过了验证
@@ -83,7 +83,14 @@ export default {
     },
     methods: {
         okHandle() {
+            const that = this;
             // console.log(this.renderList);
+            this.renderList.filter(i=>{
+                if(!i.value){
+                    that.$Message.error(`请输入${ i.tip }`)
+                    return
+                }
+            })
             this.addAdminData = {
                 tel: this.renderList[0].value,
                 name: this.renderList[1].value,
@@ -92,6 +99,7 @@ export default {
                 address: this.renderList[4].value,
                 pwd: this.renderList[5].value,
                 birth: this.renderList[6].value,
+                isSupper:true
             };
             updataAdmin(this.addAdminData);
         },

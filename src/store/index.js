@@ -11,11 +11,14 @@ export default new Vuex.Store({
     LIMIT: '',
     TISSUE: '',
     BIRTH: '',
-    LOGING:false,
+    LOADING: false,
+    LOADINGTEXT: "Loading111111...",
+    LOGIN: false,
+    ADDRESS: '',
   },
   getters: {
     getId: state => {
-      return state.Id
+      return state.ID
     },
     getName: state => {
       return state.NAME
@@ -32,9 +35,19 @@ export default new Vuex.Store({
     getBirth: state => {
       return state.BIRTH
     },
-    getLoging: state=>{
-      return state.LOGING
-    }
+    getLoding: state => {
+      return state.LOADING
+    },
+    getLoadingText: state => {
+      console.log(state.LOADINGTEXT,"------");
+      return state.LOADINGTEXT
+    },
+    getLogin: state => {
+      return state.LOGIN
+    },
+    getAddress: state => {
+      return state.ADDRESS
+    },
   },
   mutations: {
     setId: (state, value) => {
@@ -55,9 +68,20 @@ export default new Vuex.Store({
     setBirth: (state, value) => {
       state.BIRTH = value
     },
-    setLoging: (state, value) => {
-      state.LOGING = !!value
-    }
+    setAddress: (state, value) => {
+      state.ADDRESS = value
+    },
+    setLoading: (state, value) => {
+      state.LOADING = !!value
+    },
+    setLodingText: (state, value) => {
+      // 设置loading文案时把window上面的属性也一起设置了，主要使用的是window上的属性
+      state.LOADINGTEXT = value;
+      window.vLoadingText = value;
+    },
+    setLogin: (state, value) => {
+      state.LOGIN = !!value
+    },
   },
   actions: {
     updataId: ({
@@ -90,10 +114,25 @@ export default new Vuex.Store({
     }, value) => {
       commit("setBirth", value)
     },
-    updataLoging: ({
+    updataLoding: ({
       commit
     }, value) => {
-      commit("setLoging", value)
+      commit("setLoading", value)
+    },
+    updataLodingText: ({
+      commit
+    }, value) => {
+      commit("setLodingText", value)
+    },
+    updataLogin: ({
+      commit
+    }, value) => {
+      commit("setLogin", value)
+    },
+    updataAddress: ({
+      commit
+    }, value) => {
+      commit("setAddress", value)
     },
   },
   modules: {}

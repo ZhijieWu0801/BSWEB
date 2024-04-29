@@ -1,20 +1,15 @@
 <template>
-    <div id="app" v-loading="isLoging">
-        <!-- <div @click="aaaa">aaaaaa</div> -->
+    <div id="app" v-loading="$store.state.LOADING"  v-loading:loadingText.prop="lodingText">
+        <div @click="aaaa">aaaaaa</div>
         <div class="appBody" v-if="true">
-            <template v-if="!isLogin">
-                <login @login="login" />
+            <template v-if="!$store.state.LOGIN">
+                <login />
             </template>
             <template v-else>
                 <leftNav></leftNav>
                 <router-view class="view" />
                 <!-- <button @click="change">qiehuan</button> -->
             </template>
-        </div>
-        <div>
-            <input type="file" @change="handleFileInputChange" />
-            <button @click="convertImageToBase64">Convert to Base64</button>
-            <img :src="base64Image" alt="Converted Image" style="width: 500px;"/>
         </div>
     </div>
 </template>
@@ -28,14 +23,24 @@ export default {
     },
     data() {
         return {
-           // isLogin: !!localStorage.getItem("token") || false,
-            isLogin:  false,
-            isLoging: false,
+            // isLogin: !!localStorage.getItem("token") || false,
+            isLogin: this.$store.state.LOGIN,
+            isLoding: this.$store.state.LOADING,
             base64Image: "",
+            // lodingText: this.$store.getters.getLoadingText,
+            lodingText:"aaaaaaaaaaaa",
         };
+    },
+    created() {
+        window.vLoadingText = this.$store.getters.getLoadingText
     },
     mounted() {
         console.log(this.isLogin);
+    },
+    computed:{
+        // lodingText(){
+        //     return this.$store.getters.getLoadingText
+        // }
     },
     methods: {
         tobase64() {
@@ -44,7 +49,6 @@ export default {
         handleFileInputChange(event) {
             const file = event.target.files[0];
             const reader = new FileReader();
-
             reader.onload = () => {
                 this.base64Image = reader.result;
             };
@@ -53,25 +57,25 @@ export default {
         },
         convertImageToBase64() {
             // 这里可以发送 base64Image 到后端处理
-            console.log("Base64 Image:", {aaa:this.base64Image});
+            console.log("Base64 Image:", { aaa: this.base64Image });
         },
         aaaa() {
             // v-loding 测试函数
-            // this.isLoging = !this.isLoging;
-            // this.$store.commit("setLoging", this.isLoging);
-            // setTimeout(() => {
-            //     this.isLoging = !this.isLoging;
-            //     this.$store.commit("setLoging", this.isLoging);
-            // }, 3000);
-            console.log(
-
-                this.$comfunc.testTel("12345600000")
-            );
+            this.isLoding = !this.isLoding;
+            // this.lodingText = this.$store.state.LOADINGTEXT;
+            console.log("this.lodingText",this.lodingText);
+            this.$store.commit("setLoding", this.isLoding);
+            setTimeout(() => {
+                this.isLoding = !this.isLoding;
+                this.$store.commit("setLoding", this.isLoding);
+                console.log(this.$store.state.LOADING);
+            }, 3000);
+            // console.log(this.$comfunc.testTel("12345600000"));
         },
         login(r) {
-            console.log(r);
-            this.isLogin = r;
-            this.isLogin && this.$router.push({ path: "/about" });
+            // console.log(r,this.$store.state.LOGIN,this.isLogin);
+            // this.isLogin = this.$store.state.LOGIN;
+            this.isLogin && this.$router.push({ path: "/index" });
         },
         change() {
             console.log(111);

@@ -81,7 +81,7 @@ export function getAllAdmin(data) {
  * @returns 
  */
 export function getAdminByTel(data) {
-  return axiosInstance.post("/api/admin/getAdminInfoByTel",data)
+  return axiosInstance.post("/api/admin/getAdminByTel",data)
 }
 /**
  * 通过电话删除管理员
