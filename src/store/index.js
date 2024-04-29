@@ -12,7 +12,7 @@ export default new Vuex.Store({
     TISSUE: '',
     BIRTH: '',
     LOADING: false,
-    LOADINGTEXT: "Loading111111...",
+    LOADINGTEXT: "Loading...",
     LOGIN: false,
     ADDRESS: '',
   },

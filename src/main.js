@@ -8,7 +8,7 @@ import debouncePlugin from "@/plugins/debouncePlugin.js";
 import axiosPlugin from "@/plugins/axiosPlugin.js";
 import testTel from "@/plugins/testTel.js";
 import loading from "@/Directive/loadingDirective"
-
+import "@/js/tool"
 
 
 
