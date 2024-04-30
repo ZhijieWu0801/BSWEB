@@ -1,5 +1,5 @@
 <template>
-    <div id="app" v-loading="$store.state.LOADING"  v-loading:loadingText.prop="lodingText">
+    <div id="app"  v-loading:loadingText.prop="lodingText" v-loading="$store.state.LOADING">
         <div @click="aaaa">aaaaaa</div>
         <div class="appBody" v-if="true">
             <template v-if="!$store.state.LOGIN">
@@ -28,7 +28,7 @@ export default {
             isLoding: this.$store.state.LOADING,
             base64Image: "",
             // lodingText: this.$store.getters.getLoadingText,
-            lodingText:"aaaaaaaaaaaa",
+            lodingText:"",
         };
     },
     created() {
@@ -64,10 +64,10 @@ export default {
             this.isLoding = !this.isLoding;
             // this.lodingText = this.$store.state.LOADINGTEXT;
             console.log("this.lodingText",this.lodingText);
-            this.$store.commit("setLoding", this.isLoding);
+            this.$store.commit("setLoading", this.isLoding);
             setTimeout(() => {
                 this.isLoding = !this.isLoding;
-                this.$store.commit("setLoding", this.isLoding);
+                this.$store.commit("setLoading", this.isLoding);
                 console.log(this.$store.state.LOADING);
             }, 3000);
             // console.log(this.$comfunc.testTel("12345600000"));

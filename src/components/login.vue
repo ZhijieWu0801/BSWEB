@@ -59,7 +59,7 @@
                 if (!this.isLogin) {
                     return;
                 }
-                this.$store.commit("setLoding", true);
+                this.$store.commit("setLoading", true);
                 login({
                     tel: this.tel,
                     pwd: this.pwd,
@@ -84,7 +84,7 @@
                         }
                     })
                     .then(() => {
-                        this.$store.commit("setLoding", false);
+                        this.$store.commit("setLoading", false);
                     })
                     .catch((error) => {
                         console.error("Error:", error); // 输出错误信息

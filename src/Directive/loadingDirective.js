@@ -33,7 +33,7 @@ export default {
       },
       update(el, binding) {
         // 在指令的值更新时，更新加载动画的显示状态
-        console.log(binding.expression, 564654);
+        console.log(binding, 564654);
         if (binding.value) {
           // console.log(binding);
           spinner.querySelector("#lodingText").innerText = window.vLoadingText || "Loading...";

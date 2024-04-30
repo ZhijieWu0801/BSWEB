@@ -95,7 +95,7 @@
         },
         methods: {
             aaa() {
-                this.$store.commit("setLoding", true);
+                this.$store.commit("setLoading", true);
                 console.log(this.$store.state);
             },
             handleFileInputChange(event) {
@@ -127,10 +127,10 @@
                     name: this.renderList[2].value,
                     master: this.renderList[3].value,
                 };
-                this.$store.commit("setLoding", true);
+                this.$store.commit("setLoading", true);
 
                 addPet(this.addpetData).then(()=>{
-                this.$store.commit("setLoding", false);
+                this.$store.commit("setLoading", false);
 
                 });
             },

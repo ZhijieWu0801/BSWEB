@@ -99,3 +99,21 @@ export function deleteAdminByTel(data) {
 export function updataAdmin(data) {
   return axiosInstance.post("/api/admin/updataAdmin",data)
 }
+/**
+ * 连接宠物和主人
+ * 宠物领养
+ * @param {*} data {tel:电话，serial：宠物编号}    
+ * @returns 
+ */
+export function linkPet(data) {
+  return axiosInstance.post("/api/master/linkPet",data)
+}
+/**
+ * 断开宠物和主人的连接
+ * 宠物归还
+ * @param {*} data {tel:电话，serial：宠物编号}    
+ * @returns 
+ */
+export function disconnectPetLink(data) {
+  return axiosInstance.post("/api/master/disconnectPetLink",data)
+}

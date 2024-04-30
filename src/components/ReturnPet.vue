@@ -1,5 +1,5 @@
 <template>
-  <div class="animalExitContainer">
+  <div class="returnPetContainer">
     <Dialogs @Ok="okHandle" @Cancel="CancelHandle" :title="title">
       <template>
         <div class="slotContainer">

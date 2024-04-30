@@ -17,3 +17,12 @@
 .notSelectable * {
   user-select: none;
 }
+.view {
+  height: 100%;
+}
+.view > .dialogContainer {
+  height: 100%;
+}
+.view.animalExitContainer {
+  background-color: red;
+}

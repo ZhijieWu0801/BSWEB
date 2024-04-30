@@ -74,7 +74,7 @@ export default new Vuex.Store({
     setLoading: (state, value) => {
       state.LOADING = !!value
     },
-    setLodingText: (state, value) => {
+    setLoadingText: (state, value) => {
       // 设置loading文案时把window上面的属性也一起设置了，主要使用的是window上的属性
       state.LOADINGTEXT = value;
       window.vLoadingText = value;
@@ -122,7 +122,7 @@ export default new Vuex.Store({
     updataLodingText: ({
       commit
     }, value) => {
-      commit("setLodingText", value)
+      commit("setLoadingText", value)
     },
     updataLogin: ({
       commit
