@@ -17,13 +17,15 @@
                         <span class="itemText"> {{ item.lable }}：</span>
 
                         <input
-                            v-if="item.type !== 'select'"
+                            v-if="
+                                item.type !== 'select' && item.type !== 'file'
+                            "
                             class="itemInput"
                             :type="item.type"
                             v-model="renderList[index].value"
                         />
                         <select
-                            v-else
+                            v-else-if="item.type === 'select'"
                             name=""
                             id=""
                             v-model="renderList[index].value"
@@ -36,9 +38,17 @@
                                 {{ opt.lable }}
                             </option>
                         </select>
+                        <template v-else-if="item.type === 'file'">
+                            <input
+                                class="itemInput"
+                                :type="item.type"
+                                @change="handleFileInputChange"
+                            />
+                            <img :src="base64Image" alt="" />
+                        </template>
                     </div>
                 </div>
-                <div>
+                <!-- <div>
                     <input type="file" @change="handleFileInputChange" />
                     <button @click="convertImageToBase64">
                         Convert to Base64
@@ -49,7 +59,7 @@
                         alt="Converted Image"
                         style="width: 500px"
                     />
-                </div>
+                </div> -->
             </template>
         </Dialogs>
     </div>
@@ -58,7 +68,7 @@
 <script>
     import { forecastByPy, addPet } from "@/api/Api.js";
     import Dialogs from "@/components/Dialog.vue";
-    import store from "@/store";
+    // import store from "@/store";
     export default {
         data() {
             const serialMap = {};
@@ -86,8 +96,10 @@
                     { lable: "宠物编号", value: "", type: "text" },
                     { lable: "宠物名字", value: "", type: "text" },
                     { lable: "宠物主人电话", value: "", type: "text" },
+                    { lable: "宠物照片", value: "", type: "file" },
                     // { lable: "宠物照片", value: "", type: "image" },
                 ],
+                petImgBase64: "",
             };
         },
         components: {
@@ -98,14 +110,14 @@
                 this.$store.commit("setLoading", true);
                 console.log(this.$store.state);
             },
+            getPetImgBase64() {},
             handleFileInputChange(event) {
                 const file = event.target.files[0];
                 const reader = new FileReader();
-
                 reader.onload = () => {
                     this.base64Image = reader.result;
+                    this.petImgBase64 = reader.result;
                 };
-
                 reader.readAsDataURL(file);
             },
             convertImageToBase64() {
@@ -126,12 +138,12 @@
                     // serial: this.renderList[1].value,
                     name: this.renderList[2].value,
                     master: this.renderList[3].value,
+                    img: this.renderList[4].value,
                 };
                 this.$store.commit("setLoading", true);
 
-                addPet(this.addpetData).then(()=>{
-                this.$store.commit("setLoading", false);
-
+                addPet(this.addpetData).then(() => {
+                    this.$store.commit("setLoading", false);
                 });
             },
             //     this.$axios.post(

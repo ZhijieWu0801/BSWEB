@@ -39,8 +39,8 @@
                 </div>
                 <!-- <button @click="getAdminInfoByTel">aaaa</button> -->
             </template>
+            <tables :tableData="tableData" :tableTitle="tableTitle"></tables>
         </Dialogs>
-        <tables :tableData="tableData" :tableTitle="tableTitle"></tables>
     </div>
 </template>
     
@@ -66,16 +66,10 @@
                 selectAdminData: {},
                 renderList: [
                     { lable: "管理员电话", value: "", type: "text" },
-                    //   { lable: "管理员名字", value: "", type: "text" },
-                    //   { lable: "管理员权限", value: "", type: "text" },
-                    //   { lable: "管理员组织", value: "", type: "text" },
-                    //   { lable: "管理员地址", value: "", type: "text" },
-                    //   { lable: "管理员密码", value: "", type: "text" },
-                    //   { lable: "管理员生日", value: "", type: "datetime-local" },
                 ],
                 // verifyTel:'',
                 passValidation: false, //判断是否通过了验证
-                showNotClickMask: true, //有没有禁用遮罩
+                showNotClickMask: true, //有没有禁用的遮罩
                 debounceFunc: null,
                 info: {},
                 //   tableTitle: ["姓名", "", ""],
@@ -116,7 +110,7 @@
                 console.log(1111);
                 this.initTable();
                 getAdminByTel(this.selectAdminData).then((r) => {
-                    // console.log(r.data.data);
+                    console.log(r.data.data);
                     if (!r.data.data) {
                         return;
                     }

@@ -39,7 +39,7 @@ export default new Vuex.Store({
       return state.LOADING
     },
     getLoadingText: state => {
-      console.log(state.LOADINGTEXT,"------");
+      // console.log(state.LOADINGTEXT,"------");
       return state.LOADINGTEXT
     },
     getLogin: state => {

@@ -34,18 +34,20 @@
         methods: {
             CancelHandle() {},
             okHandle() {
+                console.log(this.form)
                 for (const key in this.form) {
                     if(!key.tel){
-                        return this.$Message.error(`请完整填完表单`) 
+                        // return this.$Message.error(`请完整填完表单`) 
                     }
                 }
                 
-                data = {
+                const data = {
                     tel: this.form.tel,
                     serial: this.form.serial,
                 };
-                linkPet(data).then(ietn=>{
-                    
+                linkPet(data).then(r=>{
+                    // console.log(r.data);
+                    this.$Message.info(r.data.msg)
                 });
             },
         },

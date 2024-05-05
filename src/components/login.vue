@@ -11,7 +11,7 @@
                     ><input type="password" class="value" v-model="pwd" />
                 </div>
                 <button @click="login" class="btn">登录</button>
-                <button @click="goSignIn" class="btn">去注册</button>
+                <!-- <button @click="goSignIn" class="btn">去注册</button> -->
             </template>
             <template v-else>
                 <div class="item rowCenter">
@@ -81,6 +81,9 @@
                             this.$router.push({ path: "/index" });
                             // this.$emit("login", r.data.isSuccessful);
                             console.log(this.$store.state);
+                        }
+                        else {
+                            this.$Message.error(r.data.msg)
                         }
                     })
                     .then(() => {

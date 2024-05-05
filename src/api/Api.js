@@ -52,6 +52,26 @@ export function getAllPetByType(data) {
   return axiosInstance.post("/api/pet/getAllPetByType", data)
 }
 /**
+ * 通过宠物编号获取宠物信息
+ * @param {} data {serial：编号}
+ * @returns 
+ */
+export function getPetBySerial(data) {
+  return axiosInstance.post("/api/pet/getPetBySerial", data)
+}
+
+/**
+ * 删除宠物，宠物出站，从数据库删除
+ * @param {*} data {serial：编号}
+ * @returns 
+ */
+
+export function deletPet(data) {
+  return axiosInstance.post("/api/pet/deletPet", data)
+}
+
+
+/**
  * 创建管理员 {
           tel: ,
           name: ,
