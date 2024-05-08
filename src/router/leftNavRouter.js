@@ -13,7 +13,7 @@ const leftNavRouter = [{
     {
         path: "/petInbound",
         name: "petInbound",
-        component: () => import("@/components/PetInbound.vue"),
+        component: () => import("@/components/petInbound.vue"),
         props: true
     },
     {

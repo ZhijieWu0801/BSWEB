@@ -36,8 +36,8 @@
         components: {
             tables,
         },
-        beforeRouteEnter(){
-            
+        beforeRouteEnter(to,from,next){
+            next();
         },
         data() {
             const tableData = [];
@@ -50,8 +50,8 @@
                 // species,
                 pageSize: 5,
                 page: 1,
-                currentPage: 0,
-                total: 0,
+                currentPage:0,
+                total:0,
             };
         },
         mounted() {},
@@ -72,40 +72,36 @@
                 getAllPetByType(data).then((r) => {
                     console.log(r.data);
                     // console.log(r.data);
-                    if (r.data.data) {
-                        for (const key in r.data.data[0]) {
-                            //   console.log(key);
-                            TableMap[key] &&
-                                this.tableTitle.push({
-                                    prop: TableMap[key],
-                                    label: TableMap[key],
-                                });
-                        }
-                        console.log(this.tableTitle, typeof r.data);
-                        this.total = r.data.total;
-                        r.data.data.map((r) => {
-                            // console.log(r);
-                            const data = {};
-                            for (const key in r) {
-                                // console.log(key);
-                                if (key === "petMaster") {
-                                    // console.log(r);
-                                    TableMap[key] &&
-                                        (data[TableMap[key]] = r[key]
-                                            ? r[key].MPName
-                                            : "暂无");
-
-                                    break;
-                                }
-                                TableMap[key] && (data[TableMap[key]] = r[key]);
-                            }
-                            // console.log(data,"-----------");
-                            this.tableData.push(data);
-                        });
-                        console.log(this.tableData, 111111111);
-                    } else {
-                        this.$Message.info("暂无数据");
+                    for (const key in r.data.data[0]) {
+                        //   console.log(key);
+                        TableMap[key] &&
+                            this.tableTitle.push({
+                                prop: TableMap[key],
+                                label: TableMap[key],
+                            });
                     }
+                    console.log(this.tableTitle, typeof r.data);
+                    this.total = r.data.total;
+                    r.data.data.map((r) => {
+                        // console.log(r);
+                        const data = {};
+                        for (const key in r) {
+                            // console.log(key);
+                            if (key === "petMaster") {
+                                // console.log(r);
+                                TableMap[key] &&
+                                    (data[TableMap[key]] = r[key]
+                                        ? r[key].MPName
+                                        : "暂无");
+
+                                break;
+                            }
+                            TableMap[key] && (data[TableMap[key]] = r[key]);
+                        }
+                        // console.log(data,"-----------");
+                        this.tableData.push(data);
+                    });
+                    console.log(this.tableData, 111111111);
                 });
                 // console.log(this.$route.params.species);
             },
@@ -115,7 +111,7 @@
             handleCurrentChange(e) {
                 console.log(22, e);
                 this.page = e;
-                this.getAllPetByType();
+                this.getAllPetByType()
             },
         },
     };
