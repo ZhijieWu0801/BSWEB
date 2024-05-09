@@ -5,14 +5,34 @@ import leftNavRouter from "routerPath/leftNavRouter"
 Vue.use(VueRouter)
 // console.log(leftNavRouter);
 // console.log([...leftNavRouter]);
-
+const yonghu = [{
+  path: "/index",
+  name: "idnex",
+  component: () => import("@/components/user/index.vue"),
+  props: true
+}, {
+  path: "/myInfo",
+  name: "myInfo",
+  component: () => import("@/components/admin/MyInfo.vue"),
+  props: true
+}, {
+  path: "/browse",
+  name: "browse",
+  component: () => import("@/components/user/Browse.vue"),
+  props: true
+},  {
+  path: "/petInfo",
+  name: "petInfo",
+  component: () => import("@/components/petInfo/petInfo.vue"),
+  props: true
+}, ]
 const routes = [
   // {
   //   path: '/',
   //   name: 'home',
   //   component: HomeView
   // },
-  ...leftNavRouter,
+  ...yonghu,
   {
     path: "/",
     name: "login",
@@ -36,12 +56,11 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
   routes
 })
-router.beforeEach((to,from,next) =>{
-  console.log(to.path , from.path);
-  if(to.path === from.path){
+router.beforeEach((to, from, next) => {
+  console.log(to.path, from.path);
+  if (to.path === from.path) {
     return
   }
   next()

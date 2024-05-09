@@ -72,7 +72,12 @@ const leftNavRouter = [{
     },
 ]
 
-
+const yonghu  = [{
+    path: "/index",
+    name: "idnex",
+    component: () => import("@/components/user/index.vue"),
+    props: true
+},]
 
 
 export default leftNavRouter

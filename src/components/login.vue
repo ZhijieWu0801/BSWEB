@@ -11,7 +11,7 @@
                     ><input type="password" class="value" v-model="pwd" />
                 </div>
                 <button @click="login" class="btn">登录</button>
-                <!-- <button @click="goSignIn" class="btn">去注册</button> -->
+                <button @click="goSignIn" class="btn">去注册</button>
             </template>
             <template v-else>
                 <div class="item rowCenter">
@@ -68,16 +68,16 @@
                         console.log(r.data);
                         if (r.data.isSuccessful) {
                             // 保存个人信息
-                            console.log(data);
+                            console.log(data,456);
                             localStorage.setItem("token", data.loginToken);
                             this.$store.commit("setLogin", r.data.isSuccessful);
                             this.$store.commit("setId", data.id);
-                            this.$store.commit("setTel", data.ATel);
-                            this.$store.commit("setName", data.AName);
-                            this.$store.commit("setLimit", data.ALimit);
-                            this.$store.commit("setTissue", data.ATissue);
-                            this.$store.commit("setAddress", data.AAddress);
-                            this.$store.commit("setBirth", data.ABirth);
+                            this.$store.commit("setTel", data.MTel);
+                            this.$store.commit("setName", data.MName);
+                            // this.$store.commit("setLimit", data.ALimit);
+                            // this.$store.commit("setTissue", data.ATissue);
+                            this.$store.commit("setAddress", data.MAddress);
+                            this.$store.commit("setBirth", data.MBirth);
                             this.$router.push({ path: "/index" });
                             // this.$emit("login", r.data.isSuccessful);
                             console.log(this.$store.state);

@@ -44,6 +44,13 @@ export function addPet(data) {
   return axiosInstance.post("/api/pet/addPet", data)
 }
 /**
+ * 获取所有宠物
+ * @returns 
+ */
+export function getAllPets() {
+  return axiosInstance.post("/api/pet/getAllPets")
+}
+/**
  * 通过宠物类型获取所有宠物列表
  * @param {} data {species:宠物类型,[page:页码,pageSize:页容量]}
  * @returns 

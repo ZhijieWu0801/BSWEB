@@ -22,22 +22,22 @@
                         value: this.$store.state.NAME || "--",
                         lable: "姓名",
                     },
-                    limit: {
-                        value: this.$store.state.LIMIT || "--",
-                        lable: "权限",
-                    },
-                    tissue: {
-                        value: this.$store.state.TISSUE || "--",
-                        lable: "组织",
-                    },
+                    // limit: {
+                    //     value: this.$store.state.LIMIT || "--",
+                    //     lable: "权限",
+                    // },
+                    // tissue: {
+                    //     value: this.$store.state.TISSUE || "--",
+                    //     lable: "组织",
+                    // },
                     address: {
                         value: this.$store.state.ADDRESS || "--",
                         lable: "家庭地址",
                     },
-                    birthday: {
-                        value: this.$store.state.BIRTH || "--",
-                        lable: "生日",
-                    },
+                    // birthday: {
+                    //     value: this.$store.state.BIRTH || "--",
+                    //     lable: "生日",
+                    // },
                 },
             };
         },

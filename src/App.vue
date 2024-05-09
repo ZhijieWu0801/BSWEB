@@ -1,6 +1,6 @@
 <template>
     <div id="app"  v-loading:loadingText.prop="lodingText" v-loading="$store.state.LOADING">
-        <div @click="aaaa">aaaaaa</div>
+        <!-- <div @click="aaaa">aaaaaa</div> -->
         <div class="appBody" v-if="true">
             <template v-if="!$store.state.LOGIN">
                 <login />
@@ -106,6 +106,8 @@ export default {
         }
         .view {
             flex: 1 1;
+            max-height: 100vh;
+            overflow: auto;
         }
     }
 }
