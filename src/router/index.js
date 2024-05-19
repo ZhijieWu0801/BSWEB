@@ -24,6 +24,7 @@ const routes = [
     name: "rightTable",
     component: () => import("@/components/RightTable.vue")
   },
+  
   {
     path: '/index',
     name: 'index',

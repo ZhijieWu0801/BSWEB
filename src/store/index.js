@@ -15,8 +15,12 @@ export default new Vuex.Store({
     LOADINGTEXT: "Loading...",
     LOGIN: false,
     ADDRESS: '',
+    SOCKET: "", //ws实例
   },
   getters: {
+    getSocket: state => {
+      return state.SOCKET
+    },
     getId: state => {
       return state.ID
     },
@@ -50,6 +54,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    setSocket: (state, value) => {
+      state.SOCKET = value
+    },
     setId: (state, value) => {
       state.ID = value
     },
@@ -84,6 +91,11 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    updataSocket: ({
+      commit
+    }, value) => {
+      commit("setSocket", value)
+    },
     updataId: ({
       commit
     }, value) => {

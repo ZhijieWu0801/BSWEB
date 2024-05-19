@@ -44,11 +44,15 @@
                                 :type="item.type"
                                 @change="handleFileInputChange"
                             />
-                            <img :src="base64Image" alt="" />
+                            <img
+                                :src="base64Image"
+                                alt=""
+                                style="width: 500px"
+                            />
                         </template>
                     </div>
                 </div>
-                <!-- <div>
+                <div>
                     <input type="file" @change="handleFileInputChange" />
                     <button @click="convertImageToBase64">
                         Convert to Base64
@@ -59,14 +63,14 @@
                         alt="Converted Image"
                         style="width: 500px"
                     />
-                </div> -->
+                </div>
             </template>
         </Dialogs>
     </div>
 </template>
 
 <script>
-    import { forecastByPy, addPet } from "@/api/Api.js";
+    import { forecastByPy, addPet, search,upload } from "@/api/Api.js";
     import Dialogs from "@/components/Dialog.vue";
     // import store from "@/store";
     export default {
@@ -122,13 +126,16 @@
             },
             convertImageToBase64() {
                 const data = {
-                    image: this.base64Image,
+                    img: this.base64Image,
                 };
                 // 这里可以发送 base64Image 到后端处理
                 // this.$axios.post(`${this.$baseUrl}/api/serve/PY`, {
                 //     image: this.base64Image,
                 // });
-                forecastByPy(data);
+                console.log(data);
+                // search(data);
+                upload({serial:"111111111",img:this.base64Image})
+                // forecastByPy(data);
                 // console.log("Base64 Image:", { aaa: this.base64Image });
             },
             okHandle() {
@@ -138,7 +145,7 @@
                     // serial: this.renderList[1].value,
                     name: this.renderList[2].value,
                     master: this.renderList[3].value,
-                    img: this.renderList[4].value,
+                    img: this.base64Image,
                 };
                 this.$store.commit("setLoading", true);
 

@@ -69,6 +69,11 @@ const leftNavList = [{
         index: "7",
         path: "/myInfo",
         lable: "个人信息",
+    },
+    {
+        index: "8",
+        path: "/userMessage",
+        lable: "用户消息",
     }
 ]
 export default leftNavList

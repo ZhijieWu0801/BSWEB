@@ -10,7 +10,8 @@ import testTel from "@/plugins/testTel.js";
 import loading from "@/Directive/loadingDirective"
 import "@/js/tool"
 
-
+import EventBus from '@/bus/bus.js';
+Vue.prototype.$bus = EventBus;
 
 const {Message} = require("element-ui")
 Vue.prototype.$Message = Message

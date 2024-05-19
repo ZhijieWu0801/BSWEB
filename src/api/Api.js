@@ -16,6 +16,12 @@ const axiosInstance = axios.create({
 export function login(data) {
   return axiosInstance.post("/api/login", data)
 }
+export function getImg() {
+  return axiosInstance.post("/api/pet/getImg")
+}
+export function upload(data) {
+  return axiosInstance.post("/upload",data)
+}
 
 /**
  * 注册
@@ -42,6 +48,14 @@ export function forecastByPy(data) {
  */
 export function addPet(data) {
   return axiosInstance.post("/api/pet/addPet", data)
+}
+/**
+ * 比对图片
+ * @param {*} data { img } 
+ * @returns 
+ */
+export function search(data) {
+  return axiosInstance.post("/api/pet/search", data)
 }
 /**
  * 通过宠物类型获取所有宠物列表
@@ -136,4 +150,12 @@ export function linkPet(data) {
  */
 export function disconnectPetLink(data) {
   return axiosInstance.post("/api/master/disconnectPetLink",data)
+}
+/**
+ * 通过电话获取用户信息
+ * @param {*} data {tel}
+ * @returns 
+ */
+export function getMasterByTel(data) {
+  return axiosInstance.post("/api/master/getMasterByTel",data)
 }

@@ -35,6 +35,11 @@ const leftNavRouter = [{
         props: true
     },
     {
+        path: "/userMessage",
+        name: "userMessage",
+        component: () => import("@/components/UserMessage.vue")
+      },
+    {
         path: "/addAdmin",
         name: "addAdmin",
         component: () => import("@/components/admin/AddAdmin.vue"),
