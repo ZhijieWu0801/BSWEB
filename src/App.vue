@@ -10,6 +10,39 @@
 
         <input type="file" @change="fileChange"> -->
         <!-- <div @click="aaaa">aaaaaa</div> -->
+        <div
+            class="message"
+            v-if="$store.state.WSMESSAGE.length"
+            @click="showMessageDialog"
+        >
+            您有新消息{{ $store.state.WSMESSAGE.length }}
+        </div>
+        <div
+            class="messageDialog"
+            v-if="messageDialog"
+            @click.self="closeDialog"
+        >
+            <div class="itemComtainer">
+                <div
+                    class="item"
+                    v-for="(item, index) in $store.state.WSMESSAGE"
+                    :key="index"
+                >
+                    <div class="row">
+                        <div class="label">申请类型</div>
+                        <div class="label">宠物编号</div>
+                        <div class="label">申请结果</div>
+                        <div class="label">处理人</div>
+                    </div>
+                    <div class="row">
+                        <div class="label">{{ item.message.type }}</div>
+                        <div class="label">{{ item.message.petSerial }}</div>
+                        <div class="label">{{ item.message.result }}</div>
+                        <div class="label">{{ item.adminId }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="appBody" v-if="true">
             <template v-if="!$store.state.LOGIN">
                 <login />
@@ -42,6 +75,7 @@
                 socket: "",
                 message: "",
                 imgSrc: "",
+                messageDialog: false,
             };
         },
         created() {
@@ -49,10 +83,10 @@
         },
         mounted() {
             /**
-             * 
+             *
              */
             this.$bus.$on("sendMessageToServe", (data) => {
-                console.log(data,444555);
+                console.log(data, 444555);
                 this.sendMessage(data);
             });
             console.log(this.isLogin);
@@ -70,7 +104,14 @@
             },
         },
         methods: {
-            fileChange(file){
+            showMessageDialog() {
+                this.messageDialog = true;
+
+            },
+            closeDialog() {
+                this.messageDialog = false;
+            },
+            fileChange(file) {
                 console.log(file);
             },
             linkeServe() {
@@ -91,8 +132,16 @@
                     socket.send(messageInfo);
                 });
                 // 当接收到消息时
-                socket.addEventListener("message", function (event) {
-                    console.log("收到消息:", event.data);
+                socket.addEventListener("message", function (message) {
+                    // 二进制数据（示例）
+                    const binaryData = new Uint8Array(message);
+
+                    // 创建一个 TextDecoder 对象
+                    const decoder = new TextDecoder("utf-8");
+
+                    // 解码二进制数据并转换为字符串
+                    const utf8String = decoder.decode(binaryData);
+                    console.log("收到消息:", utf8String);
                 });
 
                 // 当连接关闭时
@@ -121,16 +170,16 @@
                 // 要发送的消息对象
                 const messageObject = {
                     userId: data.id,
-                    standing: 0,
-                    content: "这是来自管理员的消息",
+                    standing: 100,
+                    content: "这是来自用户的消息",
                     timestamp: Date.now(),
                     // 可以附加任意额外的信息
                     message: data.message,
                 };
                 const message = JSON.stringify(messageObject);
-                console.log("this.message",message);
+                console.log("this.message", message);
                 if (message) {
-                    console.log(111,this.$store.state);
+                    console.log(111, this.$store.state);
                     this.$store.state.SOCKET.send(message);
                 }
             },
@@ -191,6 +240,11 @@
         text-align: center;
         color: #2c3e50;
         height: 100vh;
+        .label,.value{
+            // line-height: 1.5;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
         .appBody {
             display: flex;
             height: 100%;
@@ -199,6 +253,54 @@
             }
             .view {
                 flex: 1 1;
+                height: 100vh;
+                overflow: auto;
+            }
+        }
+        .message {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            right: 50px;
+            bottom: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            border-radius: 50%;
+            z-index: 999;
+            background-color: #e97142;
+        }
+        .itemComtainer{
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0,0.8);
+            color: #fff;
+            .item{
+                background-color: #fff;
+                width: 20%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                padding: 15px;
+                .row{
+                width: 80%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    .label{
+                        flex: 1 1 22%;
+                        color: #000;
+                        text-overflow: ellipsis;
+                    }
+                }
             }
         }
     }

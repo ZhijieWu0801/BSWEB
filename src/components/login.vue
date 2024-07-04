@@ -1,7 +1,7 @@
 <template>
     <div class="loginOuter" id="loginBG">
         <div class="sysName">
-            流浪宠物管理系统
+            爱宠基地
         </div>
         <div class="loginContainer dobCenter"  @keydown.enter="login">
             <div class="container">
@@ -15,7 +15,7 @@
                         ><input type="password" class="value" v-model="pwd" />
                     </div>
                     <button @click="login" class="btn">登录</button>
-                    <!-- <button @click="goSignIn" class="btn">去注册</button> -->
+                    <button @click="goSignIn" class="btn">去注册</button>
                 </template>
                 <template v-else>
                     <div class="item rowCenter">
@@ -72,15 +72,17 @@
                     console.log("WebSocket 连接已建立");
                     const info = {
                         userId: id,
-                        standing: 0,
+                        standing: 100,
                     };
                     const messageInfo = JSON.stringify(info);
                     // 发送消息给服务器
                     socket.send(messageInfo);
                 });
                 // 当接收到消息时
-                socket.addEventListener("message", function (event) {
-                    console.log("收到消息:", event.data);
+                socket.addEventListener("message", (message) =>{
+                    this.$store.commit("addWSMessage",JSON.parse(message.data));
+
+                    console.log("收到消息:", message.data);
                 });
 
                 // 当连接关闭时
@@ -106,6 +108,7 @@
                 login({
                     tel: this.tel,
                     pwd: this.pwd,
+                    user:1,
                 }).then((r) => {
                         const data = r.data.data;
                         console.log(r.data);
@@ -115,13 +118,13 @@
                             localStorage.setItem("token", data.loginToken);
                             this.$store.commit("setLogin", r.data.isSuccessful);
                             this.$store.commit("setId", data.id);
-                            this.$store.commit("setTel", data.ATel);
-                            this.$store.commit("setName", data.AName);
-                            this.$store.commit("setLimit", data.ALimit);
-                            this.$store.commit("setTissue", data.ATissue);
-                            this.$store.commit("setAddress", data.AAddress);
-                            this.$store.commit("setBirth", data.ABirth);
-                            this.linkeServe(data.ATel);
+                            this.$store.commit("setTel", data.MTel);
+                            this.$store.commit("setName", data.MPName);
+                            this.$store.commit("setLimit", data.MLimit);
+                            this.$store.commit("setTissue", data.MTissue);
+                            this.$store.commit("setAddress", data.MAddress);
+                            this.$store.commit("setBirth", data.MBirth);
+                            this.linkeServe(data.MTel);
                             this.$router.push({ path: "/index" });
                             // this.$emit("login", r.data.isSuccessful);
                             console.log(this.$store.state);
@@ -160,16 +163,24 @@
 
 <style lang="less">
 .loginOuter{
+    color: #fff;
     width: 100%;
     height: 100%;
+    position: relative;
     .sysName{
+        top: 25vh;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50% , -50%);
         font-size: 50px;
     }
     .loginContainer {
+        scale: 1.5;
         width: 100%;
         height: 100%;
         .container {
-            background-color: aqua;
+            border: 2px solid #5cdcec;
+            background-color: rgba(62, 75, 75, 0.452);
             padding: 40px;
             .item {
                 margin-bottom: 25px;
@@ -179,6 +190,12 @@
                 margin-right: 15px;
                 width: 80px;
                 // text-align: right;
+            }
+            .btn{
+                width: 50px;
+                background-color: #81fff761;
+                outline:none ;
+                margin: 0 10px;
             }
         }
     }

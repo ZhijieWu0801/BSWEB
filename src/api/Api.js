@@ -58,6 +58,14 @@ export function search(data) {
   return axiosInstance.post("/api/pet/search", data)
 }
 /**
+ * 获取所有宠物列表
+ * @param {} data {species:宠物类型,[page:页码,pageSize:页容量]}
+ * @returns 
+ */
+export function getAllPets(data) {
+  return axiosInstance.post("/api/pet/getAllPets", data)
+}
+/**
  * 通过宠物类型获取所有宠物列表
  * @param {} data {species:宠物类型,[page:页码,pageSize:页容量]}
  * @returns 
@@ -134,6 +142,14 @@ export function updataAdmin(data) {
   return axiosInstance.post("/api/admin/updataAdmin",data)
 }
 /**
+ * 编辑/更新 宠物信息
+ * @param {Object} obj {serial,[species,PName,PetMasterTel,AdminTel]} 
+ * @returns 
+ */
+export function updataPet(data) {
+  return axiosInstance.post("/api/pet/updatePet",data)
+}
+/**
  * 连接宠物和主人
  * 宠物领养
  * @param {*} data {tel:电话，serial：宠物编号}    
@@ -158,4 +174,12 @@ export function disconnectPetLink(data) {
  */
 export function getMasterByTel(data) {
   return axiosInstance.post("/api/master/getMasterByTel",data)
+}
+/**
+ * 通过电话获取用户宠物信息
+ * @param {*} data {tel}
+ * @returns 
+ */
+export function getMasterPetByTel(data) {
+  return axiosInstance.post("/api/master/getMasterPetByTel",data)
 }

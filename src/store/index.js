@@ -16,10 +16,14 @@ export default new Vuex.Store({
     LOGIN: false,
     ADDRESS: '',
     SOCKET: "", //ws实例
+    WSMESSAGE: [], //ws来的消息
   },
   getters: {
     getSocket: state => {
       return state.SOCKET
+    },
+    getWSMessage: state => {
+      return state.WSMESSAGE
     },
     getId: state => {
       return state.ID
@@ -54,6 +58,13 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    addWSMessage: (state, value) => {
+      state.WSMESSAGE.push(value);
+    },
+    delWSMessage: (state, value) => {
+      const index = state.WSMESSAGE.indexOf(value)
+      state.WSMESSAGE.splice(index, 1);
+    },
     setSocket: (state, value) => {
       state.SOCKET = value
     },

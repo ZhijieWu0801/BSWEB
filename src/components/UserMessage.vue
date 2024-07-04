@@ -141,7 +141,7 @@
                             result: true, //同意
                             petSerial: this.petInfo.serial, //宠物编号
                             masterTel: this.userInfo.MTel, // 主人电话
-                            masterId: this.userInfo.id, // 用户id用于查找是哪个ws发来的消息//不必，可以使用特里查
+                            masterId: this.userInfo.id, // 用户id用于查找是哪个ws发来的消息//不必，可以使用tel
                         },
                     };
                     this.$bus.$emit("sendMessageToServe", data);

@@ -75,6 +75,18 @@ const leftNavRouter = [{
         component: () => import("@/components/admin/MyInfo.vue"),
         props: true
     },
+    {
+        path: "/glance",
+        name: "glance",
+        component: () => import("@/components/Glance.vue"),
+        props: true
+    },
+    {
+        path: "/addMyPet",
+        name: "addMyPet",
+        component: () => import("@/components/AddMyPet.vue"),
+        props: true
+    },
 ]
 
 
